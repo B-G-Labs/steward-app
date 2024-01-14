@@ -1,0 +1,30 @@
+services:
+  api:
+    build: .
+    env_file:
+      - .env
+    depends_on:
+      - database
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/api
+    working_dir: '/usr/src/api/apps/api'
+    command: gow run main.go 
+
+  database:
+    image: postgres:alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    logging:
+      driver: "none"
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres-db:

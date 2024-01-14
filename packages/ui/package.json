@@ -1,0 +1,14 @@
+{
+  "name": "ui",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.8.2",
+    "class-variance-authority": "^0.7.0",
+    "vue": "^3.3.12"
+  }
+}
