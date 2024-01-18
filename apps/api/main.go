@@ -1,7 +1,6 @@
 package main
 
 import (
-	// "api/database"
 	"api/database"
 	"api/user"
 	"context"
