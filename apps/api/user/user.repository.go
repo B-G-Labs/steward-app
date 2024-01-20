@@ -14,7 +14,7 @@ type UserRepository struct {
 }
 
 type repository interface {
-	GetExistingUser(id int, ctx context.Context) (User, error)
+	GetExistingUser(id int64, ctx context.Context) (User, error)
 	CreateUser(user User, ctx context.Context) (sql.Result, error)
 }
 
@@ -25,23 +25,13 @@ func NewUserRepo(db *bun.DB) UserRepository {
 }
 
 func (r *UserRepository) CreateUser(user User, ctx context.Context) (sql.Result, error) {
-
-	p := &utils.ArgonParams{
-		Memory:      64 * 1024,
-		Iterations:  3,
-		Parallelism: 2,
-		SaltLength:  16,
-		KeyLength:   32,
-	}
-
-	hash, err := utils.GenerateFromPassword(user.Password, p)
+	hash, err := utils.GenerateFromPassword(user.Password)
 
 	if err != nil {
 		return nil, err
 	}
 
 	a, err := r.db.NewInsert().Model(&User{
-		ID:       user.ID,
 		Name:     user.Name,
 		Password: hash,
 	}).Exec(ctx)
@@ -53,7 +43,7 @@ func (r *UserRepository) CreateUser(user User, ctx context.Context) (sql.Result,
 	return a, nil
 }
 
-func (r *UserRepository) GetExistingUser(id int, ctx context.Context) (User, error) {
+func (r *UserRepository) GetExistingUser(id int64, ctx context.Context) (User, error) {
 	var user User
 
 	err := r.db.NewSelect().Model(user).Where("id = ?", id).Scan(ctx)
