@@ -8,6 +8,6 @@ import (
 )
 
 func UserRouter(app fiber.Router, service UserService, ctx context.Context) {
-	app.Post("/user", middleware.Protected(), HandleCreateUser(service, ctx))
+	app.Post("/user", HandleCreateUser(service, ctx))
 	app.Get("/user/:id", middleware.Protected(), HandleGetUserById(service, ctx))
 }

@@ -1,7 +1,9 @@
 CREATE TABLE users (
-  ID SERIAL PRIMARY KEY,
-  Name varchar(255) UNIQUE,
-  Password varchar(255),
-  Active boolean,
+  id SERIAL PRIMARY KEY,
+  name varchar(255) UNIQUE,
+  password varchar(255),
+  active boolean,
+	created_at timestamp,
+	updated_at timestamp
 );
 

@@ -8,6 +8,8 @@ import (
 	"os"
 	"strings"
 
+	permission "api/src/permission"
+
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/driver/pgdriver"
@@ -21,6 +23,8 @@ func GetDatabase() *bun.DB {
 	sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(dsn)))
 
 	db := bun.NewDB(sqldb, pgdialect.New())
+
+	permission.Init(db)
 
 	app := &cli.App{
 		Name: "bun",

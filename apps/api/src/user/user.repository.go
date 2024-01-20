@@ -3,7 +3,6 @@ package user
 import (
 	"api/utils"
 	"context"
-	"log"
 
 	"github.com/uptrace/bun"
 )
@@ -33,18 +32,19 @@ func (r *UserRepository) CreateUser(user User, ctx context.Context) (int64, erro
 	model := &User{
 		Name:     user.Name,
 		Password: hash,
+		Active:   true,
 	}
 
 	sqlResult, err := r.db.NewInsert().Model(model).Exec(ctx)
 
 	if err != nil {
-		log.Fatal(err)
+		return 0, nil
 	}
 
 	id, err := sqlResult.LastInsertId()
 
 	if err != nil {
-		log.Fatal(err)
+		return 0, nil
 	}
 
 	return id, nil
@@ -56,10 +56,10 @@ func (r *UserRepository) GetExistingUser(name string, ctx context.Context) (User
 	err := r.db.NewSelect().Model(user).Where("name = ?", name).Scan(ctx)
 
 	if err != nil {
-		log.Fatal(err)
+		return *user, err
 	}
 
-	return *user, err
+	return *user, nil
 }
 
 func (r *UserRepository) GetUserById(id int64, ctx context.Context) (User, error) {
@@ -68,8 +68,8 @@ func (r *UserRepository) GetUserById(id int64, ctx context.Context) (User, error
 	err := r.db.NewSelect().Model(user).Where("id = ?", id).Scan(ctx)
 
 	if err != nil {
-		log.Fatal(err)
+		return *user, err
 	}
 
-	return *user, err
+	return *user, nil
 }
