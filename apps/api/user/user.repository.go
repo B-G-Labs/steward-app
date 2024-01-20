@@ -4,6 +4,7 @@ import (
 	"api/utils"
 	"context"
 	"database/sql"
+	"fmt"
 	"log"
 
 	"github.com/uptrace/bun"
@@ -31,22 +32,25 @@ func (r *UserRepository) CreateUser(user User, ctx context.Context) (sql.Result,
 		return nil, err
 	}
 
-	a, err := r.db.NewInsert().Model(&User{
+	model := &User{
 		Name:     user.Name,
 		Password: hash,
-	}).Exec(ctx)
+	}
+	a, err := r.db.NewInsert().Model(model).Exec(ctx)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	fmt.Println(a.LastInsertId())
+
 	return a, nil
 }
 
 func (r *UserRepository) GetExistingUser(id int64, ctx context.Context) (User, error) {
-	var user User
+	user := new(User)
 
 	err := r.db.NewSelect().Model(user).Where("id = ?", id).Scan(ctx)
 
-	return user, err
+	return *user, err
 }

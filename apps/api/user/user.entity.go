@@ -3,9 +3,9 @@ package user
 import "github.com/uptrace/bun"
 
 type User struct {
-	bun.BaseModel `bun:"table:users,alias:u"`
+	bun.BaseModel `bun:"table:users"`
 
-	ID       int64 `bun:",pk,autoincrement"`
+	ID       int64 `bun:",nullzero,pk,autoincrement"`
 	Name     string
 	Password string
 }
