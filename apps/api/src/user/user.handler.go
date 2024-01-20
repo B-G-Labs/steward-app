@@ -37,7 +37,7 @@ func HandleCreateUser(service UserService, ctx context.Context) fiber.Handler {
 	}
 }
 
-func HandleGetUser(service UserService, ctx context.Context) fiber.Handler {
+func HandleGetUserById(service UserService, ctx context.Context) fiber.Handler {
 	return func(c *fiber.Ctx) error {
 		id, err := strconv.ParseInt(c.Params("id"), 10, 64)
 
@@ -53,7 +53,7 @@ func HandleGetUser(service UserService, ctx context.Context) fiber.Handler {
 			return c.JSON(response)
 		}
 
-		result, err := service.GetExistingUser(id, ctx)
+		result, err := service.GetUserById(id, ctx)
 
 		return c.JSON(&fiber.Map{
 			"status": true,

@@ -60,7 +60,13 @@ func ComparePasswordAndHash(password, encodedHash string) (match bool, err error
 		return false, err
 	}
 
-	p := &ArgonParams{}
+	p := &ArgonParams{
+		Memory:      64 * 1024,
+		Iterations:  3,
+		Parallelism: 2,
+		SaltLength:  16,
+		KeyLength:   32,
+	}
 
 	// Derive the key from the other password using the same parameters.
 	otherHash := argon2.IDKey([]byte(password), salt, p.Iterations, p.Memory, p.Parallelism, p.KeyLength)
@@ -93,7 +99,13 @@ func decodeHash(encodedHash string) (salt, hash []byte, err error) {
 		return nil, nil, ErrIncompatibleVersion
 	}
 
-	p := &ArgonParams{}
+	p := &ArgonParams{
+		Memory:      64 * 1024,
+		Iterations:  3,
+		Parallelism: 2,
+		SaltLength:  16,
+		KeyLength:   32,
+	}
 
 	_, err = fmt.Sscanf(vals[3], "m=%d,t=%d,p=%d", &p.Memory, &p.Iterations, &p.Parallelism)
 

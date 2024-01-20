@@ -2,7 +2,8 @@ package main
 
 import (
 	"api/database"
-	"api/user"
+	"api/src/auth"
+	"api/src/user"
 	"context"
 
 	"github.com/gofiber/fiber/v2"
@@ -15,8 +16,8 @@ func main() {
 	app := fiber.New()
 	app.Use(cors.New())
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
+	app.Get("/status", func(c *fiber.Ctx) error {
+		return c.SendString("Online")
 	})
 
 	database := database.GetDatabase()
@@ -24,8 +25,10 @@ func main() {
 	api := app.Group("/api")
 
 	userService := user.NewService(database)
+	authService := auth.NewService(database)
 
 	user.UserRouter(api, userService, ctx)
+	auth.AuthRouter(api, authService, ctx)
 
 	app.Listen(":3000")
 
