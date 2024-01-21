@@ -3,6 +3,7 @@ package main
 import (
 	"api/database"
 	"api/src/auth"
+	"api/src/permission"
 	"api/src/user"
 	"context"
 
@@ -26,9 +27,11 @@ func main() {
 
 	userService := user.NewService(database)
 	authService := auth.NewService(database)
+	permissionService := permission.NewService(database, ctx)
 
 	user.UserRouter(api, userService, ctx)
 	auth.AuthRouter(api, authService, ctx)
+	permission.Router(api, permissionService)
 
 	app.Listen(":3000")
 

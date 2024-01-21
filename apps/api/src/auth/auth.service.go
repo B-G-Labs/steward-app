@@ -37,7 +37,7 @@ func NewService(database *bun.DB) AuthService {
 }
 
 func (s *service) LogIn(userParams user.User, ctx context.Context) (string, error) {
-	u, err := s.repository.GetExistingUser(userParams.Name, ctx)
+	u, err := s.repository.GetUserByName(userParams.Name, ctx)
 
 	fmt.Println(u)
 
@@ -62,7 +62,7 @@ func (s *service) LogIn(userParams user.User, ctx context.Context) (string, erro
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 		// Generate encoded token and send it as response.
-		t, err := token.SignedString([]byte(config.Config("SECRET")))
+		jwtToken, err := token.SignedString([]byte(config.Config("SECRET")))
 
 		if err != nil {
 			log.Fatal(err)
@@ -70,7 +70,7 @@ func (s *service) LogIn(userParams user.User, ctx context.Context) (string, erro
 			return "", err
 		}
 
-		return t, nil
+		return jwtToken, nil
 	}
 
 	return "0", ErrInvalidCredentials

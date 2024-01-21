@@ -12,7 +12,7 @@ import (
 type Permission struct {
 	bun.BaseModel `bun:"table:permissions"`
 
-	ID          int64  `bun:",nullzero,pk,autoincrement"`
+	ID          int64  `bun:",pk,nullzero,notnull,autoincrement"`
 	Name        string `bun:",unique"`
 	DisplayName string
 	Description bool
@@ -31,14 +31,14 @@ func Init(db *bun.DB) {
 
 type UserPermission struct {
 	PermissionId int64
-	Permission   *Permission `bun:"rel:belongs-to,join:permission_id=permission.id"`
+	Permission   *Permission `bun:"rel:belongs-to,join:permission_id=id"`
 	UserId       int64
-	User         *user.User `bun:"rel:belongs-to,join:user_id=user.id"`
+	User         *user.User `bun:"rel:belongs-to,join:user_id=id"`
 }
 
 type RolePermission struct {
 	PermissionId int64
-	Permission   *Permission `bun:"rel:belongs-to,join:permission_id=permission.id"`
+	Permission   *Permission `bun:"rel:belongs-to,join:permission_id=id"`
 	RoleId       int64
-	Role         *role.Role `bun:"rel:belongs-to,join:role_id=role.id"`
+	Role         *role.Role `bun:"rel:belongs-to,join:role_id=id"`
 }

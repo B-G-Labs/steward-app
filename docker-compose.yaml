@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/usr/src/api
     working_dir: '/usr/src/api/apps/api'
-    command: go run main.go db init && go run main.go db migrate && gow run main.go 
+    command: gow run main.go 
 
   database:
     image: postgres:alpine

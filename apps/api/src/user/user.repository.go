@@ -41,16 +41,10 @@ func (r *UserRepository) CreateUser(user User, ctx context.Context) (int64, erro
 		return 0, nil
 	}
 
-	id, err := sqlResult.LastInsertId()
-
-	if err != nil {
-		return 0, nil
-	}
-
-	return id, nil
+	return sqlResult.LastInsertId()
 }
 
-func (r *UserRepository) GetExistingUser(name string, ctx context.Context) (User, error) {
+func (r *UserRepository) GetUserByName(name string, ctx context.Context) (User, error) {
 	user := new(User)
 
 	err := r.db.NewSelect().Model(user).Where("name = ?", name).Scan(ctx)

@@ -1,8 +1,10 @@
-CREATE TABLE user_permissions (
-  	id int pk increments
-    permission_id int fk permissions.id
-    role_id int fk roles.id
-	created_at timestamp
-	updated_at timestamp
+CREATE TABLE IF NOT EXISTS role_permissions (
+    id serial PRIMARY KEY NOT NULL,
+    permission_id int NOT NULL,
+    role_id int NOT NULL,
+    created_at timestamp DEFAULT NOW(),
+    updated_at timestamp DEFAULT NOW(),
+    CONSTRAINT fk_permission FOREIGN KEY (permission_id) REFERENCES permissions (id) ON DELETE CASCADE,
+    CONSTRAINT fk_user FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE
 );
 

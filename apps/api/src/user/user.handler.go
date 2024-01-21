@@ -32,7 +32,6 @@ func HandleCreateUser(service UserService, ctx context.Context) fiber.Handler {
 			"status": true,
 			"data":   result,
 			"error":  err,
-			"body":   requestBody,
 		})
 	}
 }
