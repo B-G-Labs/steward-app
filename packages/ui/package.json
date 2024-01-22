@@ -9,6 +9,6 @@
   "dependencies": {
     "@nuxt/kit": "^3.8.2",
     "class-variance-authority": "^0.7.0",
-    "vue": "^3.3.12"
+    "vue": "^3.4.15"
   }
 }
