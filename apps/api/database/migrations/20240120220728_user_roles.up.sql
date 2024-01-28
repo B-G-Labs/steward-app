@@ -1,10 +1,10 @@
-CREATE TABLE IF NOT EXISTS role_permissions (
-    id serial PRIMARY KEY NOT NULL,
-    permission_id int NOT NULL,
-    role_id int NOT NULL,
-    created_at timestamp DEFAULT NOW(),
-    updated_at timestamp DEFAULT NOW(),
-    CONSTRAINT fk_permission FOREIGN KEY (permission_id) REFERENCES permissions (id) ON DELETE CASCADE,
-    CONSTRAINT fk_user FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE
+create table role_permissions (
+    id serial primary key not null,
+    permission_id int not null,
+    role_id int not null,
+    created_at timestamp default now(),
+    updated_at timestamp default now(),
+    constraint fk_permission foreign key (permission_id) references permissions (id) on delete cascade,
+    constraint fk_user foreign key (role_id) references roles (id) on delete cascade
 );
 

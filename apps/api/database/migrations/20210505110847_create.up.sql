@@ -1,9 +1,8 @@
-CREATE TABLE IF NOT EXISTS users(
-  id serial PRIMARY KEY,
-  name varchar(255) UNIQUE,
+create table if not exists users (
+  id serial primary key,
+  name varchar(255) unique,
   password varchar(255),
-  active boolean NOT NULL DEFAULT TRUE,
-  created_at timestamp DEFAULT NOW(),
-  updated_at timestamp DEFAULT NOW(),
+  active boolean not null default true,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
 );
-
