@@ -12,6 +12,7 @@ type PermissionService interface {
 	CreatePermission(p Permission) (int64, error)
 	GetPermissionsById(id int64) (Permission, error)
 	DeletePermission(id int64) (int64, error)
+	AssignPermissionToRole(roleId int64, permissionId int64) (bool, error)
 }
 
 type service struct {
@@ -26,6 +27,10 @@ func NewService(database *bun.DB, ctx context.Context) PermissionService {
 		repository: userRepo,
 		ctx:        ctx,
 	}
+}
+
+func (s *service) AssignPermissionToRole(roleId int64, permissionId int64) (bool, error) {
+	return s.repository.AssignPermissionToRole(roleId, permissionId)
 }
 
 func (s *service) ListPermissions() ([]Permission, error) {

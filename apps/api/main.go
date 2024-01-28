@@ -7,6 +7,7 @@ import (
 	"api/src/user"
 	"context"
 
+	"github.com/bytedance/sonic"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
@@ -14,7 +15,10 @@ import (
 func main() {
 	ctx := context.Background()
 
-	app := fiber.New()
+	app := fiber.New(fiber.Config{
+		JSONEncoder: sonic.Marshal,
+		JSONDecoder: sonic.Unmarshal,
+	})
 	app.Use(cors.New())
 
 	app.Get("/status", func(c *fiber.Ctx) error {

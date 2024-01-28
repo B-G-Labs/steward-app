@@ -17,6 +17,7 @@ type repository interface {
 	CreatePermission(p Permission) (int64, error)
 	GetPermissionsById(id int64) (Permission, error)
 	DeletePermission(id int64) (int64, error)
+	AssignPermissionToRole(roleId int64, permissionId int64) (bool, error)
 }
 
 func NewPermissionRepository(database *bun.DB, ctx context.Context) PermissionRepository {
@@ -26,10 +27,30 @@ func NewPermissionRepository(database *bun.DB, ctx context.Context) PermissionRe
 	}
 }
 
+func (r *PermissionRepository) AssignPermissionToRole(roleId int64, permissionId int64) (bool, error) {
+	values := map[string]interface{}{
+		"role_id":       roleId,
+		"permission_id": permissionId,
+	}
+
+	_, err := r.db.NewInsert().
+		Model(&values).
+		TableExpr("role_permissions").
+		Exec(r.ctx)
+
+	if err != nil {
+		return false, err
+	}
+
+	return true, nil
+}
+
 func (r *PermissionRepository) ListPermissions() ([]Permission, error) {
 	var permissions []Permission
 
-	err := r.db.NewSelect().Model(&permissions).Scan(r.ctx)
+	err := r.db.NewSelect().
+		Model(&permissions).
+		Scan(r.ctx)
 
 	if err != nil {
 		return permissions, err
@@ -41,7 +62,10 @@ func (r *PermissionRepository) ListPermissions() ([]Permission, error) {
 func (r *PermissionRepository) GetPermissionsById(id int64) (Permission, error) {
 	permission := new(Permission)
 
-	err := r.db.NewSelect().Model(permission).Where("id = ?", id).Scan(r.ctx)
+	err := r.db.NewSelect().
+		Model(permission).
+		Where("id = ?", id).
+		Scan(r.ctx)
 
 	if err != nil {
 		return *permission, err
@@ -97,7 +121,11 @@ func (r *PermissionRepository) UpdatePermission(p Permission) (Permission, error
 
 func (r *PermissionRepository) DeletePermission(id int64) (int64, error) {
 	permission := new(Permission)
-	result, err := r.db.NewDelete().Model(permission).Where("id = ?", id).Exec(r.ctx)
+
+	result, err := r.db.NewDelete().
+		Model(permission).
+		Where("id = ?", id).
+		Exec(r.ctx)
 
 	if err != nil {
 		return 0, err

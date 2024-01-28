@@ -21,6 +21,6 @@ func HandleLogin(service AuthService, ctx context.Context) fiber.Handler {
 			return c.SendStatus(fiber.StatusInternalServerError)
 		}
 
-		return c.JSON(fiber.Map{"status": "success", "message": "Success login", "data": token})
+		return c.JSON(fiber.Map{"status": true, "message": "Success login", "data": token})
 	}
 }
