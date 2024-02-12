@@ -1,5 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
+import {browserslistToTargets} from 'lightningcss';
+import browserslist from 'browserslist'
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   app: {
@@ -17,6 +20,15 @@ export default defineNuxtConfig({
     "ui",
   ],
   vite: {
+    css: {
+      transformer: 'lightningcss',
+      lightningcss: {
+        targets: browserslistToTargets(browserslist('>= 0.25%'))
+      }
+    },
+    build: {
+      cssMinify: 'lightningcss'
+    },
     plugins: [],
     vue: {
       customElement: true,

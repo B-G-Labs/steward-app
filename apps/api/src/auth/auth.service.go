@@ -6,7 +6,6 @@ import (
 	utils "api/utils"
 	"context"
 	"errors"
-	"fmt"
 	"time"
 
 	"log"
@@ -17,29 +16,30 @@ import (
 )
 
 type AuthService interface {
-	LogIn(user user.User, ctx context.Context) (string, error)
+	LogIn(user user.User) (string, error)
+	Register(userParams user.User) (int64, error)
 }
 
 type service struct {
 	repository user.UserRepository
+	ctx        context.Context
 }
 
 var (
 	ErrInvalidCredentials = errors.New("Invalid credentials")
 )
 
-func NewService(database *bun.DB) AuthService {
+func NewService(database *bun.DB, ctx context.Context) AuthService {
 	userRepo := user.NewUserRepo(database)
 
 	return &service{
 		repository: userRepo,
+		ctx:        ctx,
 	}
 }
 
-func (s *service) LogIn(userParams user.User, ctx context.Context) (string, error) {
-	u, err := s.repository.GetUserByName(userParams.Name, ctx)
-
-	fmt.Println(u)
+func (s *service) LogIn(userParams user.User) (string, error) {
+	u, err := s.repository.GetUserByName(userParams.Name, s.ctx)
 
 	if err != nil {
 		log.Fatal(err)
@@ -55,7 +55,7 @@ func (s *service) LogIn(userParams user.User, ctx context.Context) (string, erro
 		claims := jwt.MapClaims{
 			"user_id": u.ID,
 			"name":    u.Name,
-			"exp":     time.Now().Add(time.Hour * 24).Unix(),
+			"exp":     time.Now().Add(time.Hour * 12).Unix(),
 		}
 
 		// Create token
@@ -73,5 +73,9 @@ func (s *service) LogIn(userParams user.User, ctx context.Context) (string, erro
 		return jwtToken, nil
 	}
 
-	return "0", ErrInvalidCredentials
+	return "Error", ErrInvalidCredentials
+}
+
+func (s *service) Register(userParams user.User) (int64, error) {
+	return s.repository.CreateUser(userParams, s.ctx)
 }

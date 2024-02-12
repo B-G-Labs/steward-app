@@ -25,15 +25,7 @@ type Permission struct {
 func Init(db *bun.DB) {
 	// Register many to many model so bun can better recognize m2m relation.
 	// This should be done before you use the model for the first time.
-	db.RegisterModel((*UserPermission)(nil))
 	db.RegisterModel((*RolePermission)(nil))
-}
-
-type UserPermission struct {
-	PermissionId int64
-	Permission   *Permission `bun:"rel:belongs-to,join:permission_id=id"`
-	UserId       int64
-	User         *user.User `bun:"rel:belongs-to,join:user_id=id"`
 }
 
 type RolePermission struct {

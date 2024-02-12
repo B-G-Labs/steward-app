@@ -16,7 +16,9 @@
   "devDependencies": {
     "@nuxt-modules/compression": "^0.1.0",
     "@nuxt/devtools": "latest",
-    "nuxt": "^3.8.2",
+    "browserslist": "^4.22.3",
+    "lightningcss": "^1.23.0",
+    "nuxt": "^3.9.2",
     "vite-plugin-compression": "^0.5.1",
     "vue": "^3.3.12",
     "vue-router": "^4.2.5"
