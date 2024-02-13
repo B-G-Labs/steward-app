@@ -9,8 +9,10 @@ export default defineNuxtConfig({
     head: {
       title: "App",
     },
+
   },
   modules: [
+    "@pinia/nuxt",
     [
       "@nuxt-modules/compression",
       {
@@ -30,9 +32,6 @@ export default defineNuxtConfig({
       cssMinify: "lightningcss",
     },
     plugins: [],
-    vue: {
-      customElement: true,
-    },
     vueJsx: {
       mergeProps: true,
     },
