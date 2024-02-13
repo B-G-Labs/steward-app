@@ -13,6 +13,7 @@ export default defineNuxtConfig({
   },
   modules: [
     "@pinia/nuxt",
+    "common",
     [
       "@nuxt-modules/compression",
       {

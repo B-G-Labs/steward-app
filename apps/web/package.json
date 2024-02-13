@@ -13,7 +13,8 @@
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
     "pinia": "^2.1.7",
-    "ui": "workspace:*"
+    "ui": "workspace:*",
+    "common": "workspace:*"
   },
   "devDependencies": {
     "@nuxt-modules/compression": "^0.1.0",
