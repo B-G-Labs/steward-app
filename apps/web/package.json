@@ -24,7 +24,7 @@
     "browserslist": "^4.22.3",
     "eslint-plugin-vitest": "^0.3.22",
     "lightningcss": "^1.23.0",
-    "nuxt": "^3.9.2",
+    "nuxt": "^3.10.1",
     "vite-plugin-compression": "^0.5.1",
     "vitest": "^1.2.2",
     "vue": "^3.3.12",
