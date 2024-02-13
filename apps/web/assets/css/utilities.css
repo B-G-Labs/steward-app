@@ -1,3 +1,27 @@
 html {
     font-size: 62.5%;
 }
+
+:root {
+    --white: #FFFFFF;
+    --black: #000000;
+    
+    --primary-10: #6F9200;
+    --primary-20: #81A315;
+    --primary-30: #95B433;
+    --primary-40: #ABC94E;
+    --primary-50: #B3D05C;
+    --primary-60: #BBD764;
+    --primary-70: #C3DD73;
+    --primary-80: #CCE482;
+    --primary-90: #D3EA8D;
+    --primary-95: #DDF29F;
+    --primary-99: #E5F8AC;
+    --on-primary: #FFFFFF;
+
+    /* --secondary: ;
+    --secondary-container: ;
+    --on-secondary-container: ;
+
+    --tertiary: ; */
+}

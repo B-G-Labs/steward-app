@@ -1,15 +1,17 @@
 <template>
   <div>
     <div class="components-container">
-      <smexy-button>Big</smexy-button>
+      <smexy-button size="lg">Big</smexy-button>
       <smexy-button>Medium</smexy-button>
       <smexy-button>Small</smexy-button>
     </div>
 
     <div class="components-container">
-      <smexy-button btnStyle="fill">Fill</smexy-button>
-      <smexy-button>Outline</smexy-button>
-      <smexy-button>Flat</smexy-button>
+      <smexy-button type="flat">Flat</smexy-button>
+      <smexy-button type="filled">Fill</smexy-button>
+      <smexy-button type="tonal">Tonal</smexy-button>
+      <smexy-button type="elevated">Elevated</smexy-button>
+      <smexy-button type="outlined">Outline</smexy-button>
     </div>
 
     <div>
@@ -35,11 +37,13 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 </script>
 
-<style scoped>
+<style lang="scss">
+
 .components-container {
-  margin: 1rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
   gap: 1rem;
 }
+
 </style>

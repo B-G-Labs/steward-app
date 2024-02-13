@@ -9,7 +9,6 @@ export default defineNuxtConfig({
     head: {
       title: "App",
     },
-
   },
   modules: [
     "@pinia/nuxt",
@@ -20,6 +19,7 @@ export default defineNuxtConfig({
       },
     ],
     "ui",
+    "@nuxtjs/color-mode"
   ],
   vite: {
     css: {
@@ -35,6 +35,6 @@ export default defineNuxtConfig({
     vueJsx: {
       mergeProps: true,
     },
-  },
+  },  
   css: ["./assets/css/utilities.css"],
 });

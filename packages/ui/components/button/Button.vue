@@ -28,7 +28,7 @@ withDefaults(
     size: "md",
   }
 );
-</script>
+</script> 
 
 <template>
   <button :class="button({ type, size })">
@@ -36,4 +36,40 @@ withDefaults(
   </button>
 </template>
 
-<style scoped></style>
+<style scoped>
+.button {
+  border: none;
+  cursor: pointer;
+  border-radius: 100px;
+}
+.flat{
+  background-color: transparent;
+  color: var(--primary);
+}
+
+.filled{
+  background-color: inherit;
+  color: var(--white)
+}
+
+.tonal{
+  background-color: #F0F8DE;  
+}
+
+.elevated{
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 1px 0px 3px 1px rgba(0, 0, 0, 0.15);
+}
+.outlined{
+  background-color: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.md {
+  font-size: 1.4rem;
+  padding: 1rem 2.4rem;
+}
+.lg {
+  background-color: cadetblue;
+}
+</style>
