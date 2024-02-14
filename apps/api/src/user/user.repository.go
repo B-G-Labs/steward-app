@@ -1,7 +1,7 @@
 package user
 
 import (
-	"api/utils"
+	"api/concerns/utils"
 	"context"
 
 	"github.com/uptrace/bun"
@@ -38,7 +38,7 @@ func (r *UserRepository) CreateUser(user User, ctx context.Context) (int64, erro
 	sqlResult, err := r.db.NewInsert().Model(model).Exec(ctx)
 
 	if err != nil {
-		return 0, nil
+		return 0, err
 	}
 
 	return sqlResult.LastInsertId()

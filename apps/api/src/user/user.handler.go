@@ -1,8 +1,8 @@
 package user
 
 import (
+	presenter "api/concerns/base"
 	"context"
-	"net/http"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
@@ -15,24 +15,22 @@ func HandleCreateUser(service UserService, ctx context.Context) fiber.Handler {
 		err := c.BodyParser(&requestBody)
 
 		if err != nil {
-			c.Status(http.StatusBadRequest)
-
-			response := &fiber.Map{
-				"status": false,
-				"data":   "",
-				"error":  err.Error(),
-			}
+			response := presenter.ErrorResponse(err, c)
 
 			return c.JSON(response)
 		}
 
 		result, err := service.CreateUser(requestBody, ctx)
 
-		return c.JSON(&fiber.Map{
-			"status": true,
-			"data":   result,
-			"error":  err,
-		})
+		if err != nil {
+			response := presenter.ErrorResponse(err, c)
+
+			return c.JSON(response)
+		}
+
+		response := presenter.SuccessResponse(result, c)
+
+		return c.JSON(response)
 	}
 }
 
@@ -41,24 +39,15 @@ func HandleGetUserById(service UserService, ctx context.Context) fiber.Handler {
 		id, err := strconv.ParseInt(c.Params("id"), 10, 64)
 
 		if err != nil {
-			c.Status(http.StatusBadRequest)
-
-			response := &fiber.Map{
-				"status": false,
-				"data":   "",
-				"error":  err.Error(),
-			}
+			response := presenter.ErrorResponse(err, c)
 
 			return c.JSON(response)
 		}
 
 		result, err := service.GetUserById(id, ctx)
 
-		return c.JSON(&fiber.Map{
-			"status": true,
-			"data":   result,
-			"error":  err,
-			"body":   id,
-		})
+		response := presenter.SuccessResponse(result, c)
+
+		return c.JSON(response)
 	}
 }

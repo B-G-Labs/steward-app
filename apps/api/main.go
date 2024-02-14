@@ -1,8 +1,8 @@
 package main
 
 import (
+	"api/concerns/auth"
 	"api/database"
-	"api/src/auth"
 	"api/src/permission"
 	"api/src/user"
 	"context"

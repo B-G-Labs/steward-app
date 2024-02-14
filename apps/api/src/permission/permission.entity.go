@@ -22,14 +22,9 @@ type Permission struct {
 	UpdatedAt   time.Time   `bun:",nullzero,notnull,default:current_timestamp"`
 }
 
-func Init(db *bun.DB) {
-	// Register many to many model so bun can better recognize m2m relation.
-	// This should be done before you use the model for the first time.
-	db.RegisterModel((*UserPermission)(nil))
-	db.RegisterModel((*RolePermission)(nil))
-}
-
 type UserPermission struct {
+	bun.BaseModel `bun:"table:users_permissions"`
+
 	PermissionId int64
 	Permission   *Permission `bun:"rel:belongs-to,join:permission_id=id"`
 	UserId       int64
@@ -37,8 +32,17 @@ type UserPermission struct {
 }
 
 type RolePermission struct {
+	bun.BaseModel `bun:"table:roles_permissions"`
+
 	PermissionId int64
 	Permission   *Permission `bun:"rel:belongs-to,join:permission_id=id"`
 	RoleId       int64
 	Role         *role.Role `bun:"rel:belongs-to,join:role_id=id"`
+}
+
+func Init(db *bun.DB) {
+	// Register many to many model so bun can better recognize m2m relation.
+	// This should be done before you use the model for the first time.
+	db.RegisterModel((*UserPermission)(nil))
+	db.RegisterModel((*RolePermission)(nil))
 }

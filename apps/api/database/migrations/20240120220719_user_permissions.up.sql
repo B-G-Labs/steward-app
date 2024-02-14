@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS user_permissions (
+CREATE TABLE IF NOT EXISTS users_permissions (
     id serial PRIMARY KEY NOT NULL,
     permission_id int NOT NULL,
     user_id int NOT NULL,

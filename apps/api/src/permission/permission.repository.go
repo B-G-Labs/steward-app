@@ -17,6 +17,8 @@ type repository interface {
 	CreatePermission(p Permission) (int64, error)
 	GetPermissionsById(id int64) (Permission, error)
 	DeletePermission(id int64) (int64, error)
+	AssignPermissionToRole(permissionId int64, roleId int64)
+	AssignPermissionToUser(permissionId int64, userId int64) (bool, error)
 }
 
 func NewPermissionRepository(database *bun.DB, ctx context.Context) PermissionRepository {
@@ -24,6 +26,36 @@ func NewPermissionRepository(database *bun.DB, ctx context.Context) PermissionRe
 		db:  database,
 		ctx: ctx,
 	}
+}
+
+func (r *PermissionRepository) AssignPermissionToRole(permissionId int64, roleId int64) (bool, error) {
+	values := map[string]interface{}{
+		"permission_id": permissionId,
+		"role_id":       roleId,
+	}
+
+	_, err := r.db.NewInsert().Model(&values).TableExpr("roles_permissions").Exec(r.ctx)
+
+	if err != nil {
+		return false, err
+	}
+
+	return true, nil
+}
+
+func (r *PermissionRepository) AssignPermissionToUser(permissionId int64, userId int64) (bool, error) {
+	values := map[string]interface{}{
+		"permission_id": permissionId,
+		"user_id":       userId,
+	}
+
+	_, err := r.db.NewInsert().Model(&values).TableExpr("users_permissions").Exec(r.ctx)
+
+	if err != nil {
+		return false, err
+	}
+
+	return true, nil
 }
 
 func (r *PermissionRepository) ListPermissions() ([]Permission, error) {
