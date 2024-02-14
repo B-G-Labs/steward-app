@@ -3,20 +3,20 @@ html {
 }
 
 :root {
-    --white: #FFFFFF;
-    --black: #000000;
+    --white: #FEF7FF;
+    --black: #141218;
     
     --primary-10: #6F9200;
     --primary-20: #81A315;
     --primary-30: #95B433;
-    --primary-40: #ABC94E;
+    --primary-40: rgb(171, 201, 78);
     --primary-50: #B3D05C;
     --primary-60: #BBD764;
     --primary-70: #C3DD73;
     --primary-80: #CCE482;
-    --primary-90: #D3EA8D;
-    --primary-95: #DDF29F;
-    --primary-99: #E5F8AC;
+    --primary-90: #daeba9;
+    --primary-95: #ebf3d1;
+    --primary-99: #faffeb;
     --on-primary: #FFFFFF;
 
     /* --secondary: ;

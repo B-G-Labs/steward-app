@@ -7,26 +7,26 @@
     </div>
 
     <div class="components-container">
-      <smexy-button type="flat">Flat</smexy-button>
       <smexy-button type="filled">Fill</smexy-button>
-      <smexy-button type="tonal">Tonal</smexy-button>
-      <smexy-button type="elevated">Elevated</smexy-button>
       <smexy-button type="outlined">Outline</smexy-button>
+      <smexy-button type="flat">Flat</smexy-button>
+      <smexy-button type="elevated">Elevated</smexy-button>
+      <smexy-button type="tonal">Tonal</smexy-button>
     </div>
 
     <div>
-      <smexy-button style="margin: 10px">Primary</smexy-button>
+      <smexy-button>Primary</smexy-button>
       <smexy-button>Primary small</smexy-button>
     </div>
 
     <div>
-      <smexy-button style="margin: 10px">Secondary</smexy-button>
+      <smexy-button>Secondary</smexy-button>
       <smexy-button>Secondary small</smexy-button>
     </div>
 
     <div>
-      <smexy-button style="margin: 10px">butt</smexy-button>
-      <smexy-button class="primaryMedium">butter</smexy-button>
+      <smexy-button>butt</smexy-button>
+      <smexy-button>butter</smexy-button>
     </div>
   </div>
 </template>
