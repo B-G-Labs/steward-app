@@ -1,9 +1,11 @@
+<script setup lang="ts">
+</script>
+
 <template>
-  <div>
-    <smexy-page></smexy-page>
-  </div>
+  <main class="main">
+    nothing to see here
+  </main>
 </template>
 
-<script setup lang="ts"></script>
-
-<style scoped></style>
+<style scoped>
+</style>

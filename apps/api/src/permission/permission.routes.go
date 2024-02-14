@@ -11,4 +11,5 @@ func Router(app fiber.Router, service PermissionService) {
 	app.Get("/permission", middleware.Protected(), HandleListPermission(service))
 	app.Put("/permission/:id", middleware.Protected(), HandleUpdatePermission(service))
 	app.Delete("/permission/:id", middleware.Protected(), HandleDeletePermission(service))
+	app.Post("/permission/:id/assign_to_role/:role_id", middleware.Protected(), HandleAssignPermissionToRole(service))
 }

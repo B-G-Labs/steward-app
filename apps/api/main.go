@@ -2,6 +2,7 @@ package main
 
 import (
 	"api/concerns/auth"
+	logging "api/concerns/logging"
 	"api/database"
 	"api/src/permission"
 	"api/src/user"
@@ -15,6 +16,9 @@ func main() {
 	ctx := context.Background()
 
 	app := fiber.New()
+
+	logging.InitLogger()
+
 	app.Use(cors.New())
 
 	app.Get("/status", func(c *fiber.Ctx) error {
@@ -26,11 +30,11 @@ func main() {
 	api := app.Group("/api")
 
 	userService := user.NewService(database)
-	authService := auth.NewService(database)
+	authService := auth.NewService(database, ctx)
 	permissionService := permission.NewService(database, ctx)
 
 	user.UserRouter(api, userService, ctx)
-	auth.AuthRouter(api, authService, ctx)
+	auth.AuthRouter(api, authService)
 	permission.Router(api, permissionService)
 
 	app.Listen(":3000")

@@ -11,13 +11,22 @@
     "serve": "node .output/server/index.mjs"
   },
   "dependencies": {
-    "ui": "workspace:*"
+    "@pinia/nuxt": "^0.5.1",
+    "pinia": "^2.1.7",
+    "ui": "workspace:*",
+    "common": "workspace:*"
   },
   "devDependencies": {
     "@nuxt-modules/compression": "^0.1.0",
     "@nuxt/devtools": "latest",
-    "nuxt": "^3.8.2",
+    "@nuxt/test-utils": "^3.11.0",
+    "@vue/test-utils": "^2.4.4",
+    "browserslist": "^4.22.3",
+    "eslint-plugin-vitest": "^0.3.22",
+    "lightningcss": "^1.23.0",
+    "nuxt": "^3.9.2",
     "vite-plugin-compression": "^0.5.1",
+    "vitest": "^1.2.2",
     "vue": "^3.3.12",
     "vue-router": "^4.2.5"
   }

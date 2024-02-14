@@ -1,13 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
+import { browserslistToTargets } from "lightningcss";
+import browserslist from "browserslist";
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   app: {
     head: {
       title: "App",
     },
+
   },
   modules: [
+    "@pinia/nuxt",
+    "common",
     [
       "@nuxt-modules/compression",
       {
@@ -17,10 +23,16 @@ export default defineNuxtConfig({
     "ui",
   ],
   vite: {
-    plugins: [],
-    vue: {
-      customElement: true,
+    css: {
+      transformer: "lightningcss",
+      lightningcss: {
+        targets: browserslistToTargets(browserslist(">= 0.25%")),
+      },
     },
+    build: {
+      cssMinify: "lightningcss",
+    },
+    plugins: [],
     vueJsx: {
       mergeProps: true,
     },
