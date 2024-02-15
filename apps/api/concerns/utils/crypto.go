@@ -26,7 +26,7 @@ type ArgonParams struct {
 
 func GenerateFromPassword(password string) (encodedHash string, err error) {
 	p := &ArgonParams{
-		Memory:      64 * 1024,
+		Memory:      1 * 1024,
 		Iterations:  3,
 		Parallelism: 2,
 		SaltLength:  16,
@@ -61,7 +61,7 @@ func ComparePasswordAndHash(password, encodedHash string) (match bool, err error
 	}
 
 	p := &ArgonParams{
-		Memory:      64 * 1024,
+		Memory:      1 * 1024,
 		Iterations:  3,
 		Parallelism: 2,
 		SaltLength:  16,

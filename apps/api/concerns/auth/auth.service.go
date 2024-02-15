@@ -2,13 +2,13 @@ package auth
 
 import (
 	utils "api/concerns/utils"
+	"api/concerns/validation"
 	"api/config"
 	user "api/src/user"
+
 	"context"
 	"errors"
 	"time"
-
-	"log"
 
 	"github.com/golang-jwt/jwt/v5"
 
@@ -16,13 +16,18 @@ import (
 )
 
 type AuthService interface {
-	LogIn(user user.User) (string, error)
+	LogIn(user user.User) (JWTResult, error)
 	Register(userParams user.User) (int64, error)
 }
 
 type service struct {
 	repository user.UserRepository
 	ctx        context.Context
+}
+
+type JWTResult struct {
+	token          string
+	expiryDateUnix int64
 }
 
 var (
@@ -38,44 +43,63 @@ func NewService(database *bun.DB, ctx context.Context) AuthService {
 	}
 }
 
-func (s *service) LogIn(userParams user.User) (string, error) {
-	u, err := s.repository.GetUserByName(userParams.Name, s.ctx)
+func (s *service) LogIn(userParams user.User) (JWTResult, error) {
+	result := JWTResult{}
+
+	validator := validation.Validate()
+
+	err := validator.Struct(userParams)
 
 	if err != nil {
-		log.Fatal(err)
+		return result, err
 	}
 
-	match, err := utils.ComparePasswordAndHash(userParams.Password, u.Password)
+	user, err := s.repository.GetUserByName(userParams.Name, s.ctx)
 
 	if err != nil {
-		log.Fatal(err)
+		return result, err
+	}
+
+	match, err := utils.ComparePasswordAndHash(userParams.Password, user.Password)
+
+	if err != nil {
+		return result, err
 	}
 
 	if match {
+		expiry := time.Now().Add(time.Hour * 12).Unix()
+
 		claims := jwt.MapClaims{
-			"user_id": u.ID,
-			"name":    u.Name,
-			"exp":     time.Now().Add(time.Hour * 12).Unix(),
+			"user_id": user.ID,
+			"name":    user.Name,
+			"exp":     expiry,
 		}
 
-		// Create token
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
-		// Generate encoded token and send it as response.
 		jwtToken, err := token.SignedString([]byte(config.Config("SECRET")))
 
-		if err != nil {
-			log.Fatal(err)
+		result.token = jwtToken
+		result.expiryDateUnix = expiry
 
-			return "", err
+		if err != nil {
+			return result, err
 		}
 
-		return jwtToken, nil
+		return result, nil
 	}
 
-	return "Error", ErrInvalidCredentials
+	return result, ErrInvalidCredentials
 }
 
 func (s *service) Register(userParams user.User) (int64, error) {
-	return s.repository.CreateUser(userParams, s.ctx)
+	validator := validation.Validate()
+
+	if err := validator.Struct(userParams); err != nil {
+		return 0, err
+	}
+
+	result, err := s.repository.CreateUser(userParams, s.ctx)
+
+	return result, err
 }

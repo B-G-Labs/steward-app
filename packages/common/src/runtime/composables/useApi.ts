@@ -3,8 +3,7 @@ import { defu } from "defu";
 
 export function useApi<T>(url: string, options: UseFetchOptions<T> = {}) {
   const authToken = useCookie("token");
-  const config = useRuntimeConfig();
-
+  
   const defaults: UseFetchOptions<T> = {
     baseURL: "http://127.0.0.1:3000/api",
     // set user token if connected

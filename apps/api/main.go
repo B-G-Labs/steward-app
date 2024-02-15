@@ -7,9 +7,12 @@ import (
 	"api/src/permission"
 	"api/src/user"
 	"context"
+	"time"
 
+	"github.com/alexlast/bunzap"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"go.uber.org/zap"
 )
 
 func main() {
@@ -26,6 +29,13 @@ func main() {
 	})
 
 	database := database.GetDatabase()
+
+	database.AddQueryHook(
+		bunzap.NewQueryHook(
+			bunzap.QueryHookOptions{
+				Logger:       zap.L(),
+				SlowDuration: 200 * time.Millisecond, // Omit to log all operations as debug
+			}))
 
 	api := app.Group("/api")
 

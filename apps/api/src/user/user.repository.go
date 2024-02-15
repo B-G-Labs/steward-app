@@ -3,6 +3,7 @@ package user
 import (
 	"api/concerns/utils"
 	"context"
+	"errors"
 
 	"github.com/uptrace/bun"
 )
@@ -35,19 +36,23 @@ func (r *UserRepository) CreateUser(user User, ctx context.Context) (int64, erro
 		Active:   true,
 	}
 
-	sqlResult, err := r.db.NewInsert().Model(model).Exec(ctx)
+	er := r.db.NewInsert().Model(model).Returning("*").Scan(ctx)
 
-	if err != nil {
+	if er != nil {
 		return 0, err
 	}
 
-	return sqlResult.LastInsertId()
+	return model.ID, nil
 }
 
 func (r *UserRepository) GetUserByName(name string, ctx context.Context) (User, error) {
 	user := new(User)
 
-	err := r.db.NewSelect().Model(user).Where("name = ?", name).Scan(ctx)
+	count, err := r.db.NewSelect().Model(user).Where("name = ?", name).ScanAndCount(ctx)
+
+	if count == 0 {
+		return *user, errors.New("User not found")
+	}
 
 	if err != nil {
 		return *user, err
