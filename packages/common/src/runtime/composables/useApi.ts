@@ -1,4 +1,4 @@
-import { useCookie, useFetch, type UseFetchOptions } from "#app";
+import { useCookie, useFetch, type UseFetchOptions, type FetchResult } from "#app";
 import { defu } from "defu";
 
 export function useApi<T>(url: string, options: UseFetchOptions<T> = {}) {
@@ -17,3 +17,8 @@ export function useApi<T>(url: string, options: UseFetchOptions<T> = {}) {
 
   return useFetch(url, params);
 }
+
+
+
+
+

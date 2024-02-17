@@ -6,6 +6,7 @@
     <label for="Password">Password:</label>
     <input v-model="password" name="Password" type="text" />
 
+    {{ isAuthenticated() }}
     <button type="submit" @click="handleLogIn">Submit</button>
 
     {{ token }}
@@ -17,7 +18,7 @@
 const name = ref("");
 const password = ref("");
 
-const token = useCookie("token")
+const token = useCookie("token");
 
 const handleLogIn = async (e: MouseEvent) => {
   e.preventDefault();
@@ -28,14 +29,10 @@ const handleLogIn = async (e: MouseEvent) => {
   });
 };
 const test = ref<unknown>("a");
-const { logIn } = useAuth();
+const { logIn, isAuthenticated } = useAuth();
 
 onMounted(async () => {
-  const { data } = await useApi("/user/3", {
- 
-  });
-
-
+  const { data } = await useApi("/user/3");
   test.value = data;
 });
 </script>

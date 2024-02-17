@@ -2,22 +2,56 @@ package database
 
 import (
 	"api/database/migrations"
+	"context"
 	"database/sql"
 	"fmt"
 	"log"
 	"os"
 	"strings"
+	"time"
 
 	permission "api/src/permission"
 
+	"github.com/alexlast/bunzap"
 	"github.com/uptrace/bun"
 	"github.com/uptrace/bun/dialect/pgdialect"
 	"github.com/uptrace/bun/driver/pgdriver"
 	"github.com/uptrace/bun/migrate"
 	"github.com/urfave/cli/v2"
+	"go.uber.org/zap"
 )
 
-func GetDatabase() *bun.DB {
+func initDBAndMigrate(ctx context.Context, migrator *migrate.Migrator) error {
+	err := migrator.Init(ctx)
+
+	if err != nil {
+		log.Fatal(err)
+
+	}
+
+	if err := migrator.Lock(ctx); err != nil {
+		return err
+	}
+
+	defer migrator.Unlock(ctx) //nolint:errcheck
+
+	group, err := migrator.Migrate(ctx)
+
+	if err != nil {
+		return err
+	}
+
+	if group.IsZero() {
+		zap.L().Sugar().Info("there are no new migrations to run (database is up to date)\n")
+		return nil
+	}
+
+	zap.L().Sugar().Info("migrated to %s\n", group)
+
+	return nil
+}
+
+func GetDatabase(c context.Context) *bun.DB {
 	dsn := "postgres://postgres:postgres@database:5432/postgres?sslmode=disable"
 
 	sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(dsn)))
@@ -26,16 +60,28 @@ func GetDatabase() *bun.DB {
 
 	permission.Init(db)
 
+	migrator := migrate.NewMigrator(db, migrations.Migrations)
+
+	initDBAndMigrate(c, migrator)
+
 	app := &cli.App{
 		Name: "bun",
 
 		Commands: []*cli.Command{
-			NewDBCommand(migrate.NewMigrator(db, migrations.Migrations)),
+			NewDBCommand(migrator),
 		},
 	}
+
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)
 	}
+
+	db.AddQueryHook(
+		bunzap.NewQueryHook(
+			bunzap.QueryHookOptions{
+				Logger:       zap.L(),
+				SlowDuration: 200 * time.Millisecond, // Omit to log all operations as debug
+			}))
 	return db
 }
 

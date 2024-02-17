@@ -46,8 +46,14 @@ func HandleGetUserById(service UserService, ctx context.Context) fiber.Handler {
 
 		result, err := service.GetUserById(id, ctx)
 
+		if err != nil {
+			response := presenter.ErrorResponse(err, c)
+
+			return c.JSON(response)
+		}
+
 		response := presenter.SuccessResponse(result, c)
 
-		return c.JSON(response)
+		return response
 	}
 }

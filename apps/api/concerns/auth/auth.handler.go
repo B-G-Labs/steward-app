@@ -2,7 +2,6 @@ package auth
 
 import (
 	presenter "api/concerns/base"
-	utils "api/concerns/utils"
 	user "api/src/user"
 
 	"github.com/gofiber/fiber/v2"
@@ -40,7 +39,7 @@ func HandleRegister(service AuthService) fiber.Handler {
 		id, err := service.Register(requestBody)
 
 		if err != nil {
-			return presenter.ErrorResponse(err, c, utils.ValidationErrorToStrList(err)...)
+			return presenter.ErrorResponse(err, c)
 		}
 
 		return c.JSON(fiber.Map{"data": id})

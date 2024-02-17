@@ -1,5 +1,5 @@
 import { useCookie } from "#app";
-import { useApi } from "./useApi";
+import { usePostApi } from "./usePostApi";
 
 export interface UserData {
   name: string;
@@ -9,12 +9,12 @@ export interface UserData {
 export function useAuth() {
   // TODO: implement isAuthenticated method
   // TODO: add token expiry date
-  // TODO: redirect user to log-in when not authenticated  
+  // TODO: redirect user to log-in when not authenticated
   const token = useCookie("token");
+  const tokenExpiryDate = useCookie<Number>("tokenExpiryDate");
 
   async function register(userData: UserData) {
-    const { status, error } = await useApi("/auth/register", {
-      method: "POST",
+    const { status, error, data } = await usePostApi("/auth/register", {
       body: userData,
     });
 
@@ -22,20 +22,30 @@ export function useAuth() {
 
     if (status) return true;
 
-    return false;
+    return data.value;
   }
 
   async function logIn(userData: UserData) {
-    const { data, error } = await useApi<any>("/auth/login", {
-      method: "POST",
+    const { data, error } = await usePostApi<any>("/auth/login", {
       body: userData,
     });
 
-    token.value = data.value.data;
+    token.value = data.value.data.token;
+    tokenExpiryDate.value = data.value.data.expiry_data;
+  }
+
+  function isAuthenticated() {
+    if (!tokenExpiryDate.value || token.value) return false;
+
+    const expiryDate = new Date(+tokenExpiryDate.value * 1000);
+    const tokenIsValid = token.value && expiryDate > new Date();
+
+    return tokenIsValid;
   }
 
   return {
     register,
     logIn,
+    isAuthenticated,
   };
 }

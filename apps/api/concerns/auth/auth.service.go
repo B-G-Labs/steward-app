@@ -31,7 +31,7 @@ type JWTResult struct {
 }
 
 var (
-	ErrInvalidCredentials = errors.New("Invalid credentials")
+	ErrInvalidCredentials = errors.New("nvalid credentials")
 )
 
 func NewService(database *bun.DB, ctx context.Context) AuthService {
@@ -46,14 +46,9 @@ func NewService(database *bun.DB, ctx context.Context) AuthService {
 func (s *service) LogIn(userParams user.User) (JWTResult, error) {
 	result := JWTResult{}
 
-	validator := validation.Validate()
-
-	err := validator.Struct(userParams)
-
-	if err != nil {
+	if errList, err := validation.ValidateEntity(userParams); err != nil && errList[0] != nil && len(errList) > 0 {
 		return result, err
 	}
-
 	user, err := s.repository.GetUserByName(userParams.Name, s.ctx)
 
 	if err != nil {
@@ -93,9 +88,7 @@ func (s *service) LogIn(userParams user.User) (JWTResult, error) {
 }
 
 func (s *service) Register(userParams user.User) (int64, error) {
-	validator := validation.Validate()
-
-	if err := validator.Struct(userParams); err != nil {
+	if errList, err := validation.ValidateEntity(userParams); err != nil && errList[0] != nil && len(errList) > 0 {
 		return 0, err
 	}
 

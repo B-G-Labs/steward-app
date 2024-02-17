@@ -7,35 +7,47 @@ import (
 	"api/src/permission"
 	"api/src/user"
 	"context"
-	"time"
 
-	"github.com/alexlast/bunzap"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"go.uber.org/zap"
+)
+
+type (
+	ErrorResponse struct {
+		Error       bool
+		FailedField string
+		Tag         string
+		Value       interface{}
+	}
+
+	GlobalErrorHandlerResp struct {
+		Success bool   `json:"success"`
+		Message string `json:"message"`
+	}
 )
 
 func main() {
 	ctx := context.Background()
 
-	app := fiber.New()
-
 	logging.InitLogger()
+
+	database := database.GetDatabase(ctx)
+
+	app := fiber.New(fiber.Config{
+		// Global custom error handler
+		ErrorHandler: func(c *fiber.Ctx, err error) error {
+			return c.Status(fiber.StatusBadRequest).JSON(GlobalErrorHandlerResp{
+				Success: false,
+				Message: err.Error(),
+			})
+		},
+	})
 
 	app.Use(cors.New())
 
 	app.Get("/status", func(c *fiber.Ctx) error {
 		return c.SendString("Online")
 	})
-
-	database := database.GetDatabase()
-
-	database.AddQueryHook(
-		bunzap.NewQueryHook(
-			bunzap.QueryHookOptions{
-				Logger:       zap.L(),
-				SlowDuration: 200 * time.Millisecond, // Omit to log all operations as debug
-			}))
 
 	api := app.Group("/api")
 
