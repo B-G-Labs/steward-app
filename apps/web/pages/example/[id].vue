@@ -1,33 +1,58 @@
 <template>
-  <div>
+  <div class="content-container">
     <div class="components-container">
-      <smexy-button size="lg">Big</smexy-button>
-      <smexy-button>Medium</smexy-button>
-      <smexy-button>Small</smexy-button>
+      <div class="btn-color">
+        <smexy-button size="xl">Button xl</smexy-button>
+        <smexy-button size="lg">Button lg</smexy-button>
+        <smexy-button size="md">Button md</smexy-button>
+        <smexy-button size="sm">Button sm</smexy-button>
+      </div>
+        
+      <div class="btn-color">
+          <smexy-button color="secondary" size="xl">Button xl</smexy-button>
+          <smexy-button color="secondary" size="lg">Button lg</smexy-button>
+          <smexy-button color="secondary" size="md">Button md</smexy-button>
+          <smexy-button color="secondary" size="sm">Button sm</smexy-button>
+      </div>
+      
+      <div class="btn-color">
+        <smexy-button color="tertiary" size="xl">Button xl</smexy-button>
+        <smexy-button color="tertiary" size="lg">Button lg</smexy-button>
+        <smexy-button color="tertiary" size="md">Button md</smexy-button>
+        <smexy-button color="tertiary" size="sm">Button sm</smexy-button>
+      </div>
     </div>
-
+    
     <div class="components-container">
-      <smexy-button type="filled">Fill</smexy-button>
-      <smexy-button type="outlined">Outline</smexy-button>
-      <smexy-button type="flat">Flat</smexy-button>
-      <smexy-button type="elevated">Elevated</smexy-button>
-      <smexy-button type="tonal">Tonal</smexy-button>
+      <div class="btn-types">  
+        <smexy-button type="filled">Fill</smexy-button>
+        <smexy-button type="outlined">Outline</smexy-button>
+        <smexy-button type="flat">Flat</smexy-button>
+        <smexy-button type="elevated">Elevated</smexy-button>
+        <smexy-button type="tonal">Tonal</smexy-button>
+        <smexy-button type="tonal" disabled>Tonal</smexy-button>
+      </div>
+
+      <div class="btn-types">  
+        <smexy-button color="secondary" type="filled">Fill</smexy-button>
+        <smexy-button color="secondary" type="outlined">Outline</smexy-button>
+        <smexy-button color="secondary" type="flat">Flat</smexy-button>
+        <smexy-button color="secondary" type="elevated">Elevated</smexy-button>
+        <smexy-button color="secondary" type="tonal">Tonal</smexy-button>
+        <smexy-button color="secondary" type="tonal" disabled>Tonal</smexy-button>
+
+      </div>
+
+      <div class="btn-types">  
+        <smexy-button color="tertiary" type="filled">Fill</smexy-button>
+        <smexy-button color="tertiary" type="outlined">Outline</smexy-button>
+        <smexy-button color="tertiary" type="flat">Flat</smexy-button>
+        <smexy-button color="tertiary" type="elevated">Elevated</smexy-button>
+        <smexy-button color="tertiary" type="tonal">Tonal</smexy-button>
+        <smexy-button color="tertiary" type="tonal" disabled>Tonal</smexy-button>
+      </div>
     </div>
 
-    <div>
-      <smexy-button>Primary</smexy-button>
-      <smexy-button>Primary small</smexy-button>
-    </div>
-
-    <div>
-      <smexy-button>Secondary</smexy-button>
-      <smexy-button>Secondary small</smexy-button>
-    </div>
-
-    <div>
-      <smexy-button>butt</smexy-button>
-      <smexy-button>butter</smexy-button>
-    </div>
   </div>
 </template>
 
@@ -38,12 +63,28 @@ const route = useRoute();
 </script>
 
 <style lang="scss">
-
-.components-container {
-  padding: 1rem;
+.content-container{
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  gap: 2.5rem;
+}
+
+.components-container{
+  background-color: var(--white);
+  border-radius: 50px;
+  width: fit-content;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+
+
+  .btn-color, .btn-types{
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-end;
+  }
+
 }
 
 </style>
