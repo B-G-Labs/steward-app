@@ -2,6 +2,44 @@ html {
     font-size: 62.5%;
 }
 
-body {
-    font-size: 1.6rem;
+:root {
+    --white: #FEF7FF;
+    --black: #141218;
+    
+    --primary-10: #6F9200;
+    --primary-20: #81A315;
+    --primary-30: #95B433;
+    --primary-40: #ABC94E;
+    --primary-50: #B3D05C;
+    --primary-60: #BBD764;
+    --primary-70: #C3DD73;
+    --primary-80: #CCE482;
+    --primary-90: #daeba9;
+    --primary-95: #ebf3d1;
+    --primary-99: #faffeb;
+    --on-primary: #FFFFFF;
+
+    --secondary-10: #272B1A;
+    --secondary-20: #3B4127;
+    --secondary-30: #4F5835;
+    --secondary-40: #667144;
+    --secondary-50: #7B8952;
+    --secondary-60: #94A563;
+    --secondary-70: #ADC073;
+    --secondary-80: #C6DC84;
+    --secondary-90: #E5F8AE;
+    --secondary-95: #EFFFBF;
+    --secondary-99: #f8ffe4;
+
+    --tertiary-10: #000A70;
+    --tertiary-20: #040e73;
+    --tertiary-30: #071175;
+    --tertiary-40: #0e1879;
+    --tertiary-50: #1c2582;
+    --tertiary-60: #373f93;
+    --tertiary-70: #5259a5;
+    --tertiary-80: #6d73b6;
+    --tertiary-90: #a3a8d9;
+    --tertiary-95: #bec2eb;
+    --tertiary-99: #e9ebff;
 }
