@@ -4,11 +4,11 @@ import { cva, type VariantProps } from "cva";
 const button = cva("button", {
   variants: {
     type: {
-      flat: "flat",
-      filled: "filled",
-      tonal: "tonal",
-      elevated: "elevated",
-      outlined: "outlined",
+      flat: "btn-flat",
+      filled: "btn-filled",
+      tonal: "btn-tonal",
+      elevated: "btn-elevated",
+      outlined: "btn-outlined",
     },
     size: {
       sm: "sm",
@@ -48,7 +48,7 @@ withDefaults(
   </button>
 </template>
 
-<style scoped>
+<style>
 .button {
   border: none;
   cursor: pointer;
@@ -56,7 +56,6 @@ withDefaults(
   width: max-content;
   height: max-content;
   position: relative;
-  /* overflow: hidden; */
 }
 
 .button::before{
@@ -72,101 +71,50 @@ withDefaults(
   transition: .3s;
 }
 
-.button.primary{
-  --bg-color: var(--primary-40);
-  --text-color: var(--primary-40);
-  --border-color: var(--primary-40);
-  --surface-color: var(--primary-99);
-
-  --disbaled--surface-color: var(--primary-40);
-  --disbaled--text-color: var(--primary-10);
-}
-
-.button.secondary{
-  --bg-color: var(--secondary-40);
-  --text-color: var(--secondary-40);
-  --border-color: var(--secondary-40);
-  --surface-color: var(--secondary-99);
-
-  --disbaled--surface-color: var(--primary-40);
-  --disbaled--text-color: var(--secondary-10);
-}
-
-.button.tertiary{
-  --bg-color: var(--tertiary-40);
-  --text-color: var(--tertiary-40);
-  --border-color: var(--tertiary-40);
-  --surface-color: var(--tertiary-99);
-
-  --disbaled--surface-color: var(--primary-40);
-  --disbaled--text-color: var(--tertiary-10);
-}
-
-.filled{
+.btn-filled{
   background-color: var(--bg-color);
   color: var(--white);
 }
 
-.filled:hover::before{
+.btn-filled:hover::before{
   background-color: rgba(255, 255, 255);
 }
-.filled:is(:focus, :active)::before{
+.btn-filled:is(:focus, :active)::before{
   opacity: 12%;
 }
 
-.flat{
+.btn-flat{
   background-color: transparent;
   color: var(--text-color);
 }
 
-.elevated{
+.btn-elevated{
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 1px 0px 3px 1px rgba(0, 0, 0, 0.15);
   background-color: var(--surface-color);
   color: var(--text-color)
 }
-.outlined{
+
+.btn-outlined{
   background-color: transparent;
   border: 1px solid var(--border-color);
   color: var(--text-color);
 }
 
-:is(.outlined, .flat, .elevated):hover::before{
+:is(.btn-outlined, .btn-flat, .btn-elevated):hover::before{
   background-color: var(--bg-color);
 }
 
-:is(.outlined, .flat, .elevated):is(:focus, :active)::before{
+:is(.btn-outlined, .btn-flat, .btn-elevated):is(:focus, :active)::before{
   opacity: 12%;
   background-color: var(--bg-color);
 }
 
-.tonal {
+.btn-tonal {
   background-color: transparent;
 }
-.tonal::before{
+
+.btn-tonal::before{
   background-color: var(--bg-color);
-  /* opacity: 8%; */
-}
-.sm {
-  font-size: 1.2rem;
-  line-height: 1.6rem;
-  padding: .6rem 2rem;
-}
-
-.md {
-  font-size: 1.4rem;
-  line-height: 2rem;
-  padding: 1rem 2.4rem;
-}
-.lg {
-  font-size: 1.6rem;
-  line-height: 2.4rem;
-  padding: 1.4rem 2.8rem;
-}
-
-.xl {
-  font-size: 1.8rem;
-  line-height: 2.8rem;
-  padding: 1.8rem 3.2rem;
 }
 
 .button:disabled{
