@@ -1,9 +1,8 @@
-FROM golang:latest
-
-WORKDIR /usr/src/api
-
-RUN go install github.com/mitranim/gow@latest
-
+FROM golang:alpine
+ARG ENV
+WORKDIR /usr/src/
 COPY . .
+RUN apk --no-cache add npm nodejs bash curl
+RUN chmod u+x ./apps/web/start.sh
+RUN chmod u+x install.sh && ./install.sh
 
-RUN cd ./apps/api && go mod tidy

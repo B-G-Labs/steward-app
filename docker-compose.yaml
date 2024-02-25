@@ -12,6 +12,20 @@ services:
     working_dir: '/usr/src/api/apps/api'
     command: gow run main.go 
 
+  web:
+    build: .
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+    environment:
+      - ENV=${ENV}
+    volumes:
+      - .:/usr/src/web
+    working_dir: '/usr/src/api/apps/web' 
+    command: ./start.sh
+
+
   database:
     image: postgres:alpine
     restart: always
