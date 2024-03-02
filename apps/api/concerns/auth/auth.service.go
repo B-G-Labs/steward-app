@@ -31,7 +31,7 @@ type JWTResult struct {
 }
 
 var (
-	ErrInvalidCredentials = errors.New("nvalid credentials")
+	ErrInvalidCredentials = errors.New("invalid credentials")
 )
 
 func NewService(database *bun.DB, ctx context.Context) AuthService {
