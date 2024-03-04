@@ -7,7 +7,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@nuxt/kit": "^3.10.1",
+    "@nuxt/kit": "^3.10.3",
     "cva": "npm:class-variance-authority@^0.7.0",
     "vue": "^3.4.20"
   },
