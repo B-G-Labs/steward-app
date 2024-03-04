@@ -8,7 +8,7 @@ require (
 	github.com/gofiber/contrib/jwt v1.0.8
 	github.com/golang-jwt/jwt/v5 v5.2.0
 	github.com/uptrace/bun/driver/pgdriver v1.1.16
-	go.uber.org/zap v1.26.0
+	go.uber.org/zap v1.27.0
 )
 
 require (
