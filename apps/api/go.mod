@@ -6,7 +6,7 @@ require (
 	github.com/alexlast/bunzap v0.1.0
 	github.com/go-playground/validator/v10 v10.18.0
 	github.com/gofiber/contrib/jwt v1.0.8
-	github.com/golang-jwt/jwt/v5 v5.2.0
+	github.com/golang-jwt/jwt/v5 v5.2.1
 	github.com/uptrace/bun/driver/pgdriver v1.1.16
 	go.uber.org/zap v1.26.0
 )
