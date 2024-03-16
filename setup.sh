@@ -3,7 +3,7 @@ chmod a+x install-docker.sh
 sh install-docker.sh
 
 # node and go managers
-curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s lts
+sudo curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n | bash -s lts
 curl -sSL https://git.io/g-install | sh -s
 
 # install Caddy
