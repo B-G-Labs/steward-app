@@ -5,6 +5,7 @@ import (
 	logging "api/concerns/logging"
 	"api/database"
 	"api/src/permission"
+	"api/src/role"
 	"api/src/user"
 	"context"
 
@@ -54,10 +55,12 @@ func main() {
 	userService := user.NewService(database)
 	authService := auth.NewService(database, ctx)
 	permissionService := permission.NewService(database, ctx)
+	roleService := role.NewService(database, ctx)
 
 	user.UserRouter(api, userService, ctx)
 	auth.AuthRouter(api, authService)
 	permission.Router(api, permissionService)
+	role.Router(api, roleService)
 
 	app.Listen(":3000")
 
