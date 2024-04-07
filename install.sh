@@ -1,6 +1,7 @@
 go install github.com/mitranim/gow@latest
-npm i -g pnpm turbo
 cd ./apps/api && go mod tidy
+
+npm i -g pnpm turbo
 pnpm i
 turbo prepack
 

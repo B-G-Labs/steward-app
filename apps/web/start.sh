@@ -1,5 +1,6 @@
-if [ ${ENV} = "DEV" ]; then 
+# if [ ${ENV} = "PROD" ]; then
+   # turbo build
+   # node .output/server/index.mjs
+# else
    pnpm run dev
-else
-   node .output/server/index.mjs
-fi
+# fi
