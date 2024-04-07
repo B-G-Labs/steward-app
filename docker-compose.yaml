@@ -10,10 +10,23 @@ services:
     volumes:
       - .:/usr/src/api
     working_dir: '/usr/src/api/apps/api'
-    command: gow run main.go 
+    command: [ "bash", "-c","chmod +x ./start.sh && ./start.sh"]
+
+  web:
+    build: .
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+    environment:
+      - ENV=${ENV}
+    volumes:
+      - .:/usr/src/web
+    working_dir: '/usr/src/web/apps/web' 
+    entrypoint: [ "bash", "-c","chmod +x ./start.sh && ./start.sh"]
 
   database:
-    image: postgres:alpine
+    image: postgres:16.2-alpine3.19
     restart: always
     environment:
       - POSTGRES_USER=${DB_USER}
