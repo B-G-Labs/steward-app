@@ -9,7 +9,7 @@
   "dependencies": {
     "@nuxt/kit": "^3.10.1",
     "cva": "npm:class-variance-authority@^0.7.0",
-    "vue": "^3.4.20"
+    "vue": "^3.4.21"
   },
   "devDependencies": {
     "@vueuse/core": "^10.7.2",
