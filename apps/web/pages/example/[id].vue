@@ -25,7 +25,7 @@
     
     <div class="components-container">
       <div class="btn-types">  
-        <smexy-button type="filled">Fill</smexy-button>
+        <smexy-button type="filled" icon="person" icon-right="notifications" loading>Fill</smexy-button>
         <smexy-button type="outlined">Outline</smexy-button>
         <smexy-button type="flat">Flat</smexy-button>
         <smexy-button type="elevated">Elevated</smexy-button>
@@ -52,6 +52,8 @@
         <smexy-button color="tertiary" type="tonal" disabled>Tonal</smexy-button>
       </div>
     </div>
+
+  
 
   </div>
 </template>

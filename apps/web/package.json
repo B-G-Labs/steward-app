@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
+    "material-icons": "^1.13.12",
     "pinia": "^2.1.7",
     "ui": "workspace:*",
     "common": "workspace:*"

@@ -1,5 +1,7 @@
+/* @import 'material-icons/iconfont/material-icons.css'; */
+
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 body {
@@ -8,43 +10,100 @@ body {
 }
 
 :root {
-    --white: #FEF7FF;
-    --black: #141218;
-    
-    --primary-10: #6F9200;
-    --primary-20: #81A315;
-    --primary-30: #95B433;
-    --primary-40: #ABC94E;
-    --primary-50: #B3D05C;
-    --primary-60: #BBD764;
-    --primary-70: #C3DD73;
-    --primary-80: #CCE482;
-    --primary-90: #daeba9;
-    --primary-95: #ebf3d1;
-    --primary-99: #faffeb;
-    --on-primary: #FFFFFF;
+  --white: #fef7ff;
+  --black: #141218;
 
-    --secondary-10: #272B1A;
-    --secondary-20: #3B4127;
-    --secondary-30: #4F5835;
-    --secondary-40: #667144;
-    --secondary-50: #7B8952;
-    --secondary-60: #94A563;
-    --secondary-70: #ADC073;
-    --secondary-80: #C6DC84;
-    --secondary-90: #E5F8AE;
-    --secondary-95: #EFFFBF;
-    --secondary-99: #f8ffe4;
+  --primary-10: #6f9200;
+  --primary-20: #81a315;
+  --primary-30: #95b433;
+  --primary-40: #abc94e;
+  --primary-50: #b3d05c;
+  --primary-60: #bbd764;
+  --primary-70: #c3dd73;
+  --primary-80: #cce482;
+  --primary-90: #daeba9;
+  --primary-95: #ebf3d1;
+  --primary-99: #faffeb;
+  --on-primary: #ffffff;
 
-    --tertiary-10: #000A70;
-    --tertiary-20: #040e73;
-    --tertiary-30: #071175;
-    --tertiary-40: #0e1879;
-    --tertiary-50: #1c2582;
-    --tertiary-60: #373f93;
-    --tertiary-70: #5259a5;
-    --tertiary-80: #6d73b6;
-    --tertiary-90: #a3a8d9;
-    --tertiary-95: #bec2eb;
-    --tertiary-99: #e9ebff;
+  --secondary-10: #272b1a;
+  --secondary-20: #3b4127;
+  --secondary-30: #4f5835;
+  --secondary-40: #667144;
+  --secondary-50: #7b8952;
+  --secondary-60: #94a563;
+  --secondary-70: #adc073;
+  --secondary-80: #c6dc84;
+  --secondary-90: #e5f8ae;
+  --secondary-95: #efffbf;
+  --secondary-99: #f8ffe4;
+
+  --tertiary-10: #000a70;
+  --tertiary-20: #040e73;
+  --tertiary-30: #071175;
+  --tertiary-40: #0e1879;
+  --tertiary-50: #1c2582;
+  --tertiary-60: #373f93;
+  --tertiary-70: #5259a5;
+  --tertiary-80: #6d73b6;
+  --tertiary-90: #a3a8d9;
+  --tertiary-95: #bec2eb;
+  --tertiary-99: #e9ebff;
+}
+
+.primary {
+  --bg-color: var(--primary-40);
+  --text-color: var(--primary-40);
+  --border-color: var(--primary-40);
+  --surface-color: var(--primary-99);
+
+  --disbaled--surface-color: var(--primary-40);
+  --disbaled--text-color: var(--primary-10);
+}
+
+.secondary {
+  --bg-color: var(--secondary-40);
+  --text-color: var(--secondary-40);
+  --border-color: var(--secondary-40);
+  --surface-color: var(--secondary-99);
+
+  --disbaled--surface-color: var(--primary-40);
+  --disbaled--text-color: var(--secondary-10);
+}
+
+.tertiary {
+  --bg-color: var(--tertiary-40);
+  --text-color: var(--tertiary-40);
+  --border-color: var(--tertiary-40);
+  --surface-color: var(--tertiary-99);
+
+  --disbaled--surface-color: var(--primary-40);
+  --disbaled--text-color: var(--tertiary-10);
+}
+
+.sm {
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  padding: 0.6rem 2rem;
+}
+
+.md {
+  font-size: 1.4rem;
+  line-height: 2rem;
+  padding: 1rem 2.4rem;
+}
+.lg {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  padding: 1.4rem 2.8rem;
+}
+
+.xl {
+  font-size: 1.8rem;
+  line-height: 2.8rem;
+  padding: 1.8rem 3.2rem;
+}
+
+.material-icons {
+  font-size: inherit;
 }

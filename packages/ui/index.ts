@@ -8,7 +8,9 @@ export default defineNuxtModule({
 
       dirs.push({
         path: resolve('./components'),
-        prefix: 'smexy'
+        prefix: 'smexy',
+        // enabled: true,
+        // global: true
       });
     });
   },

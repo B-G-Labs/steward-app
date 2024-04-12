@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { cva, type VariantProps } from "cva";
+import Circular from "../circular/Circular.vue";
 
 const button = cva("button", {
   variants: {
     type: {
-      flat: "flat",
-      filled: "filled",
-      tonal: "tonal",
-      elevated: "elevated",
-      outlined: "outlined",
+      flat: "btn-flat",
+      filled: "btn-filled",
+      tonal: "btn-tonal",
+      elevated: "btn-elevated",
+      outlined: "btn-outlined",
     },
     size: {
       sm: "sm",
@@ -18,37 +19,54 @@ const button = cva("button", {
     },
     color: {
       primary: "primary",
-      secondary: "secondary", 
+      secondary: "secondary",
       tertiary: "tertiary",
-    }
+    },
   },
 });
 
 type ButtonProps = VariantProps<typeof button>;
 
 withDefaults(
-  defineProps<{ 
-    type?: ButtonProps["type"],
-    size?: ButtonProps["size"], 
-    color?: ButtonProps["color"], 
-    disabled?: boolean
+  defineProps<{
+    type?: ButtonProps["type"];
+    size?: ButtonProps["size"];
+    color?: ButtonProps["color"];
+    disabled?: boolean;
+    loading?: boolean;
+    icon?: string;
+    iconRight?: string;
   }>(),
   {
     type: "elevated",
     size: "md",
-    color: "primary"
+    color: "primary",
   }
 );
-
-</script> 
+</script>
 
 <template>
   <button :class="button({ type, size, color })" :disabled="disabled">
-    <slot />
+    <div v-if="loading" class="btn-loading-state-container">
+      <Circular size="md"/>
+    </div>
+    <article>
+      <span class="material-icons">{{icon}}</span>
+      <slot />
+      <span class="material-icons">{{iconRight}}</span>
+    </article>
+      
+    <!-- <slot v-else name="loading">
+      
+      <div style="display: flex; gap: 0.5rem">
+        <Circular size="sm"/>
+        Loading...
+      </div>
+    </slot> -->
   </button>
 </template>
 
-<style scoped>
+<style>
 .button {
   border: none;
   cursor: pointer;
@@ -56,11 +74,14 @@ withDefaults(
   width: max-content;
   height: max-content;
   position: relative;
-  /* overflow: hidden; */
+
+  display: flex;
+  gap: .5rem;
+  transition: 0.3s;
 }
 
-.button::before{
-  content: '';
+.button::before {
+  content: "";
   position: absolute;
   border-radius: 100px;
   background-color: transparent;
@@ -69,114 +90,107 @@ withDefaults(
   width: 100%;
   height: 100%;
   opacity: 8%;
-  transition: .3s;
+  transition: 0.3s;
 }
 
-.button.primary{
-  --bg-color: var(--primary-40);
-  --text-color: var(--primary-40);
-  --border-color: var(--primary-40);
-  --surface-color: var(--primary-99);
-
-  --disbaled--surface-color: var(--primary-40);
-  --disbaled--text-color: var(--primary-10);
-}
-
-.button.secondary{
-  --bg-color: var(--secondary-40);
-  --text-color: var(--secondary-40);
-  --border-color: var(--secondary-40);
-  --surface-color: var(--secondary-99);
-
-  --disbaled--surface-color: var(--primary-40);
-  --disbaled--text-color: var(--secondary-10);
-}
-
-.button.tertiary{
-  --bg-color: var(--tertiary-40);
-  --text-color: var(--tertiary-40);
-  --border-color: var(--tertiary-40);
-  --surface-color: var(--tertiary-99);
-
-  --disbaled--surface-color: var(--primary-40);
-  --disbaled--text-color: var(--tertiary-10);
-}
-
-.filled{
+.btn-filled {
   background-color: var(--bg-color);
   color: var(--white);
 }
 
-.filled:hover::before{
+.btn-filled:hover::before {
   background-color: rgba(255, 255, 255);
 }
-.filled:is(:focus, :active)::before{
+.btn-filled:is(:focus, :active)::before {
   opacity: 12%;
 }
 
-.flat{
+.btn-flat {
   background-color: transparent;
   color: var(--text-color);
 }
 
-.elevated{
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 1px 0px 3px 1px rgba(0, 0, 0, 0.15);
+.btn-elevated {
+  box-shadow:
+    0px 1px 2px 0px rgba(0, 0, 0, 0.3),
+    1px 0px 3px 1px rgba(0, 0, 0, 0.15);
   background-color: var(--surface-color);
-  color: var(--text-color)
+  color: var(--text-color);
 }
-.outlined{
+
+.btn-outlined {
   background-color: transparent;
   border: 1px solid var(--border-color);
   color: var(--text-color);
 }
 
-:is(.outlined, .flat, .elevated):hover::before{
+:is(.btn-outlined, .btn-flat, .btn-elevated):hover::before {
   background-color: var(--bg-color);
 }
 
-:is(.outlined, .flat, .elevated):is(:focus, :active)::before{
+:is(.btn-outlined, .btn-flat, .btn-elevated):is(:focus, :active)::before {
   opacity: 12%;
   background-color: var(--bg-color);
 }
 
-.tonal {
+.btn-tonal {
   background-color: transparent;
 }
-.tonal::before{
+
+.btn-tonal::before {
   background-color: var(--bg-color);
-  /* opacity: 8%; */
-}
-.sm {
-  font-size: 1.2rem;
-  line-height: 1.6rem;
-  padding: .6rem 2rem;
 }
 
-.md {
-  font-size: 1.4rem;
-  line-height: 2rem;
-  padding: 1rem 2.4rem;
-}
-.lg {
-  font-size: 1.6rem;
-  line-height: 2.4rem;
-  padding: 1.4rem 2.8rem;
+.btn-loading-state-container{
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 5%;
+  top: 30%;
+  height: 40%;
+  width: 20%;
+
+  svg {
+    width: 100% !important;
+    height: 100% !important;
+  }
 }
 
-.xl {
-  font-size: 1.8rem;
-  line-height: 2.8rem;
-  padding: 1.8rem 3.2rem;
-}
-
-.button:disabled{
+.button:disabled {
   color: var(--disbaled--text-color);
   opacity: 20%;
   cursor: not-allowed;
 }
 
-.button:disabled::before{
+.button:disabled::before {
   background-color: var(--disbaled--surface-color);
   opacity: 25%;
+}
+
+.button:has(.btn-loading-state-container){
+  color: var(--disbaled--text-color);
+  opacity: 20%;
+  cursor: not-allowed;
+  
+  &.sm {
+    padding-left: 2.2rem;
+    padding-right: 1.8rem;
+  }
+
+  &.md {
+    padding-left: 2.6rem; 
+    padding-right: 2.2rem;
+
+  }
+
+  &.lg {
+    padding-left: 3rem; 
+    padding-right: 2.6rem;
+  }
+
+  &.xl {
+    padding-left: 3.4rem; 
+    padding-right: 3rem;
+  }
 }
 </style>

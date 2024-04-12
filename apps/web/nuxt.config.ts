@@ -8,6 +8,12 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "App",
+      link: [
+        {
+          href: "https://fonts.googleapis.com/css2?family=Material+Icons", 
+          rel: "stylesheet" 
+        }
+      ]
     },
   },
   modules: [
