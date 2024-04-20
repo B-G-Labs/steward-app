@@ -5,8 +5,8 @@ html {
 }
 
 body {
-    font-size: 1.6rem;
-    font-family: 'Roboto', sans-serif;
+  font-size: 1.6rem;
+  font-family: 'Roboto', sans-serif;
 }
 
 :root {
@@ -92,6 +92,7 @@ body {
   line-height: 2rem;
   padding: 1rem 2.4rem;
 }
+
 .lg {
   font-size: 1.6rem;
   line-height: 2.4rem;
@@ -106,4 +107,16 @@ body {
 
 .material-icons {
   font-size: inherit;
+}
+
+.std-padding {
+  padding: 1.6rem
+}
+
+.std-border-rad {
+  border-radius: 1.6rem;
+}
+
+.full-width {
+  width: 100%;
 }

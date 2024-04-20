@@ -42,12 +42,12 @@ const strokeWidth = 20
 </script>
 
 <template>
-  <div class="loader-container" :class="circular({size, color})">
+  <div class="loader-container" :class="circular({ size, color })">
     <svg
       :viewBox="`0 0 ${(sizeInPixels + strokeWidth) * 2} ${(sizeInPixels + strokeWidth) * 2}`"
       :height="50 * 2.5"
       :width="50 * 2.5"
-      :class="circular({})"
+      :class="circular()"
     >
     
       <circle
@@ -62,7 +62,7 @@ const strokeWidth = 20
         stroke-linecap="round"
       />
       <circle
-      v-if="type === 'triple'"
+        v-if="type === 'triple'"
         :cx="sizeInPixels + strokeWidth"
         :cy="sizeInPixels + strokeWidth + 1"
         :r="sizeInPixels"
