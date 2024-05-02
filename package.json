@@ -2,7 +2,7 @@
     "name": "with-vue-nuxt",
     "private": true,
     "scripts": {
-      "preinstall": "pnpm --filter \"./packages/**\" dev:prepare && pnpm --filter  \"./packages/**\" prepack",
+      "devPreinstall": "pnpm --filter \"./packages/**\" dev:prepare && pnpm --filter  \"./packages/**\" prepack",
       "build": "turbo run build",
       "dev": "turbo run dev",
       "lint": "turbo run lint",
@@ -16,5 +16,5 @@
       "tsconfig": "workspace:*",
       "turbo": "^1.11.3"
     },
-    "packageManager": "pnpm@8.6.10"
+    "packageManager": "pnpm@9.0.6"
   }
