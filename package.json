@@ -2,7 +2,6 @@
     "name": "with-vue-nuxt",
     "private": true,
     "scripts": {
-      "devPreinstall": "pnpm --filter \"./packages/**\" dev:prepare && pnpm --filter  \"./packages/**\" prepack",
       "build": "turbo run build",
       "dev": "turbo run dev",
       "lint": "turbo run lint",

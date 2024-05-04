@@ -7,7 +7,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "devPostinstall": "nuxt prepare",
+    "postinstall": "nuxt prepare",
     "serve": "NITRO_PORT=8080 node .output/server/index.mjs"
   },
   "dependencies": {
