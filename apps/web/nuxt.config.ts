@@ -43,5 +43,5 @@ export default defineNuxtConfig({
       mergeProps: true,
     },
   },  
-  css: ["./assets/css/utilities.css"],
+  css: ["./assets/css/utilities.css", "./assets/css/reset.css"],
 });

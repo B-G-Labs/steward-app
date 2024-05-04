@@ -1,9 +1,9 @@
-import { useCookie, useFetch, type UseFetchOptions, type FetchResult } from "#app";
+import { useCookie, useFetch, type UseFetchOptions } from "#app";
 import { defu } from "defu";
 
-export function useApi<T>(url: string, options: UseFetchOptions<T> = {}) {
+export function useApi<T>(url: string, options: UseFetchOptions<T> = {}): ReturnType<typeof useFetch> {
   const authToken = useCookie("token");
-  
+
   const defaults: UseFetchOptions<T> = {
     baseURL: "http://127.0.0.1:3000/api",
     // set user token if connected

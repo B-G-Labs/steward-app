@@ -1,12 +1,8 @@
 /* @import 'material-icons/iconfont/material-icons.css'; */
 
-html {
-  font-size: 62.5%;
-}
-
-body {
-  font-size: 1.6rem;
-  font-family: 'Roboto', sans-serif;
+#root {
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 :root {
@@ -50,6 +46,8 @@ body {
   --tertiary-95: #bec2eb;
   --tertiary-99: #e9ebff;
 }
+
+
 
 .primary {
   --bg-color: var(--primary-40);
@@ -115,6 +113,11 @@ body {
 
 .std-border-rad {
   border-radius: 1.6rem;
+}
+
+.nav-drawer {
+  height: 100%;
+  width: 6.4rem;
 }
 
 .full-width {
