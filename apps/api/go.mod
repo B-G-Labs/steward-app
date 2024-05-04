@@ -7,7 +7,7 @@ require (
 	github.com/go-playground/validator/v10 v10.19.0
 	github.com/gofiber/contrib/jwt v1.0.8
 	github.com/golang-jwt/jwt/v5 v5.2.1
-	github.com/uptrace/bun/driver/pgdriver v1.1.17
+	github.com/uptrace/bun/driver/pgdriver v1.2.1
 	go.uber.org/zap v1.27.0
 )
 
@@ -37,7 +37,7 @@ require (
 	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc // indirect
-	github.com/uptrace/bun v1.1.17
+	github.com/uptrace/bun v1.2.1
 	github.com/uptrace/bun/dialect/pgdialect v1.1.17
 	github.com/urfave/cli/v2 v2.27.1
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
