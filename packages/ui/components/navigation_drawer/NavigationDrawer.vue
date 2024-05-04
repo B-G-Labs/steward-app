@@ -1,5 +1,5 @@
 <template>
-  <div class="std-padding">
+  <div class="std-padding nav-drawer">
     <smexy-button color="tertiary" type="filled" class="full-width">
       Fill
     </smexy-button>
@@ -10,4 +10,4 @@
 
 </script>
 
-<style scoped></style>
+<style></style>
