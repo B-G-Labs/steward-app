@@ -10,7 +10,7 @@
       "ci": "chmod +x packages/utils/deploy.sh && ./packages/utils/deploy.sh"
     },
     "devDependencies": {
-      "eslint": "^8.56.0",
+      "eslint": "^9.5.0",
       "prettier": "^3.2.5",
       "tsconfig": "workspace:*",
       "turbo": "^1.11.3"
