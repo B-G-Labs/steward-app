@@ -11,7 +11,7 @@
     "serve": "NITRO_PORT=8080 node .output/server/index.mjs"
   },
   "dependencies": {
-    "@pinia/nuxt": "^0.5.1",
+    "@pinia/nuxt": "^0.10.1",
     "material-icons": "^1.13.12",
     "pinia": "^2.1.7",
     "ui": "workspace:*",
