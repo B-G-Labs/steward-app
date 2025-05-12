@@ -1,6 +1,6 @@
 module api
 
-go 1.21.5
+go 1.23.0
 
 require (
 	github.com/alexlast/bunzap v0.1.0
@@ -22,7 +22,7 @@ require (
 	github.com/xrash/smetrics v0.0.0-20240312152122-5f08fbb34913 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/net v0.22.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/text v0.25.0 // indirect
 )
 
 require (
@@ -45,7 +45,7 @@ require (
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
-	golang.org/x/crypto v0.21.0
-	golang.org/x/sys v0.18.0 // indirect
+	golang.org/x/crypto v0.38.0
+	golang.org/x/sys v0.33.0 // indirect
 	mellium.im/sasl v0.3.1 // indirect
 )
